@@ -26,3 +26,7 @@ services:
       - "traefik.enable=true"
       - "traefik.port=25565"
       - "traefik.frontend.rule=Host:${HOST}"
+
+networks:
+  web:
+    external: true
