@@ -1,32 +1,10 @@
 version: "3"
 
 services:
-  ingress:
-    image: traefik:1.7.6-alpine
-    command: --docker --docker.exposedbydefault=false --logLevel=${LOG_LEVEL}
-    env_file: .env
-    networks:
-      - web
-    ports:
-      - 80:80
-      - 443:443
-      - 8080:8080
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-
   mc:
     image: itzg/minecraft-server
+    ports:
+      - 25565:25565
     env_file: .env
-    networks:
-      - web
     volumes:
       - ./data:/data
-    labels:
-      - "traefik.docker.network=web"
-      - "traefik.enable=true"
-      - "traefik.port=25565"
-      - "traefik.frontend.rule=Host:${HOST}"
-
-networks:
-  web:
-    external: true
