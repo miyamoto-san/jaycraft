@@ -17,6 +17,8 @@ services:
   mc:
     image: itzg/minecraft-server
     env_file: .env
+    networks:
+      - web
     volumes:
       - ./data:/data
     labels:
